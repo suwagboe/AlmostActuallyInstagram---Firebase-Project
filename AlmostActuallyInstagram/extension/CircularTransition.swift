@@ -28,7 +28,7 @@ class CircularTransition: NSObject {
     
     var circleColor = UIColor.white
     
-    var duration = 0.3
+    var duration = 0.5
     
     enum CircularTransitionMode:Int {
         case present, dismiss, pop
@@ -112,15 +112,9 @@ extension CircularTransition:UIViewControllerAnimatedTransitioning {
                         transitionContext.completeTransition(success)
                         
                 })
-                
             }
-            
-            
         }
-        
     }
-    
-    
     
     func frameForCircle (withViewCenter viewCenter:CGPoint, size viewSize:CGSize, startPoint:CGPoint) -> CGRect {
         let xLength = fmax(startPoint.x, viewSize.width - startPoint.x)
@@ -132,15 +126,4 @@ extension CircularTransition:UIViewControllerAnimatedTransitioning {
         return CGRect(origin: CGPoint.zero, size: size)
     
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
