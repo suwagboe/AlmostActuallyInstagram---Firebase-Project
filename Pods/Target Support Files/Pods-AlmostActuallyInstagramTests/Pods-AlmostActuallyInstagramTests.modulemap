@@ -1,0 +1,6 @@
+framework module Pods_AlmostActuallyInstagramTests {
+  umbrella header "Pods-AlmostActuallyInstagramTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
