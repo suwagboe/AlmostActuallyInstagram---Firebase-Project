@@ -175,9 +175,9 @@
                         <color key="selectedImageTintColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
+                        <segue destination="e1C-jm-xkd" kind="relationship" relationship="viewControllers" id="IvE-03-qfu"/>
                         <segue destination="bQR-ay-byy" kind="relationship" relationship="viewControllers" id="B0P-1i-gEh"/>
                         <segue destination="8Dr-ra-Iep" kind="relationship" relationship="viewControllers" id="0Pe-7e-Esu"/>
-                        <segue destination="e1C-jm-xkd" kind="relationship" relationship="viewControllers" id="IvE-03-qfu"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxw-Cx-8no" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -275,6 +275,10 @@
                         <viewLayoutGuide key="safeArea" id="ELa-1w-KOo"/>
                     </view>
                     <navigationItem key="navigationItem" title="show the world what you found " id="bky-vf-Vbi"/>
+                    <connections>
+                        <outlet property="image" destination="cLt-gq-46x" id="LkO-sB-ReW"/>
+                        <outlet property="imageDescription" destination="F9t-L8-fLV" id="Zqt-2f-SCH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOZ-oV-BHY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,7 +12,6 @@
 		552A25AA2412B74600116374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 552A25A92412B74600116374 /* Assets.xcassets */; };
 		552A25AD2412B74600116374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 552A25AB2412B74600116374 /* LaunchScreen.storyboard */; };
 		552A25B82412B74600116374 /* AlmostActuallyInstagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552A25B72412B74600116374 /* AlmostActuallyInstagramTests.swift */; };
-		552A25C32412B97E00116374 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 552A25C22412B97E00116374 /* GoogleService-Info.plist */; };
 		552A25C72412BCFF00116374 /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 552A25C62412BCFF00116374 /* LoginView.storyboard */; };
 		552A25CA2412C36400116374 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552A25C92412C36400116374 /* LoginViewController.swift */; };
 		552A25CD2412C3EF00116374 /* AuthenticationSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552A25CC2412C3EF00116374 /* AuthenticationSession.swift */; };
@@ -27,6 +26,8 @@
 		552A25E02412CCCE00116374 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552A25DF2412CCCE00116374 /* UIViewController+Extension.swift */; };
 		552A25E22412E76700116374 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552A25E12412E76700116374 /* UpdateProfileViewController.swift */; };
 		552A25E42412EA0000116374 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552A25E32412EA0000116374 /* CircularTransition.swift */; };
+		5587239F24622E4800A7F2D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5587239E24622E4800A7F2D8 /* GoogleService-Info.plist */; };
+		558723A124622F4A00A7F2D8 /* postModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558723A024622F4A00A7F2D8 /* postModel.swift */; };
 		5B22AB708FD1B9469C5A9E1B /* Pods_AlmostActuallyInstagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0387C0A46C8C274A692DB69 /* Pods_AlmostActuallyInstagram.framework */; };
 		722F32FFFF095C2916BDAC55 /* Pods_AlmostActuallyInstagramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 405E5934B15D05A13C267464 /* Pods_AlmostActuallyInstagramTests.framework */; };
 /* End PBXBuildFile section */
@@ -52,7 +53,6 @@
 		552A25B32412B74600116374 /* AlmostActuallyInstagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlmostActuallyInstagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		552A25B72412B74600116374 /* AlmostActuallyInstagramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlmostActuallyInstagramTests.swift; sourceTree = "<group>"; };
 		552A25B92412B74600116374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		552A25C22412B97E00116374 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		552A25C62412BCFF00116374 /* LoginView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginView.storyboard; sourceTree = "<group>"; };
 		552A25C92412C36400116374 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		552A25CC2412C3EF00116374 /* AuthenticationSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSession.swift; sourceTree = "<group>"; };
@@ -67,6 +67,8 @@
 		552A25DF2412CCCE00116374 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		552A25E12412E76700116374 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
 		552A25E32412EA0000116374 /* CircularTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
+		5587239E24622E4800A7F2D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		558723A024622F4A00A7F2D8 /* postModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postModel.swift; sourceTree = "<group>"; };
 		A311290B29771C05BC01B22C /* Pods-AlmostActuallyInstagramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmostActuallyInstagramTests.release.xcconfig"; path = "Target Support Files/Pods-AlmostActuallyInstagramTests/Pods-AlmostActuallyInstagramTests.release.xcconfig"; sourceTree = "<group>"; };
 		C0387C0A46C8C274A692DB69 /* Pods_AlmostActuallyInstagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlmostActuallyInstagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ABD02C918388C03ECE6E87 /* Pods-AlmostActuallyInstagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmostActuallyInstagram.release.xcconfig"; path = "Target Support Files/Pods-AlmostActuallyInstagram/Pods-AlmostActuallyInstagram.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,7 +139,8 @@
 				552A25C52412BCE500116374 /* storyboards */,
 				552A25C42412BBC900116374 /* supporting files */,
 				552A25AE2412B74600116374 /* Info.plist */,
-				552A25C22412B97E00116374 /* GoogleService-Info.plist */,
+				5587239E24622E4800A7F2D8 /* GoogleService-Info.plist */,
+				558723A024622F4A00A7F2D8 /* postModel.swift */,
 			);
 			path = AlmostActuallyInstagram;
 			sourceTree = "<group>";
@@ -296,11 +299,11 @@
 			files = (
 				552A25AD2412B74600116374 /* LaunchScreen.storyboard in Resources */,
 				552A25D02412C77100116374 /* still butterflies.gif in Resources */,
-				552A25C32412B97E00116374 /* GoogleService-Info.plist in Resources */,
 				552A25AA2412B74600116374 /* Assets.xcassets in Resources */,
 				552A25D12412C77100116374 /* blue background butterflies.gif in Resources */,
 				552A25C72412BCFF00116374 /* LoginView.storyboard in Resources */,
 				552A25D52412C84B00116374 /* MainView.storyboard in Resources */,
+				5587239F24622E4800A7F2D8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +389,7 @@
 				552A25D72412C93600116374 /* PhotoCollectionViewController.swift in Sources */,
 				552A25A12412B74200116374 /* AppDelegate.swift in Sources */,
 				552A25E42412EA0000116374 /* CircularTransition.swift in Sources */,
+				558723A124622F4A00A7F2D8 /* postModel.swift in Sources */,
 				552A25E22412E76700116374 /* UpdateProfileViewController.swift in Sources */,
 				552A25CD2412C3EF00116374 /* AuthenticationSession.swift in Sources */,
 				552A25A32412B74200116374 /* SceneDelegate.swift in Sources */,

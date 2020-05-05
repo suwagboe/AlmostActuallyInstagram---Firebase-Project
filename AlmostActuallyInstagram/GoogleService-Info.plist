@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>541810320443-54ufi9vts0l1c4v0v4qtjcem81506ipt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.541810320443-54ufi9vts0l1c4v0v4qtjcem81506ipt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAgETeDvHyFveCYcVeF1fct7sAACJDau6M</string>
+	<key>GCM_SENDER_ID</key>
+	<string>541810320443</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>pursuitful.AlmostActuallyInstagram</string>
+	<key>PROJECT_ID</key>
+	<string>almostactuallyinstagram</string>
+	<key>STORAGE_BUCKET</key>
+	<string>almostactuallyinstagram.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:541810320443:ios:02327d7e73e4f09d57681e</string>
+	<key>DATABASE_URL</key>
+	<string>https://almostactuallyinstagram.firebaseio.com</string>
+</dict>
+</plist>
