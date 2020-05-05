@@ -10,7 +10,8 @@ import UIKit
 
 class UpdateProfileViewController: UIViewController, UIViewControllerTransitioningDelegate {
 
-    
+    @IBOutlet weak var collectionView: UICollectionView!
+
     @IBOutlet weak var updateButton: UIButton!
     
     private let transition = CircularTransition()
@@ -26,5 +27,53 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
      
      }
     
-
 }
+
+
+extension UploadAPhotoViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ":", for: indexPath)
+        
+        return cell
+    }
+    
+    
+    
+}
+
+extension UploadAPhotoViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let maxSize = UIScreen.main.bounds
+         let spacingBetweenItems: CGFloat = 11
+              let numberOfItems: CGFloat = 3
+              let totalSpacing: CGFloat = (2 * spacingBetweenItems) + (numberOfItems - 1) * spacingBetweenItems
+              let itemWidth: CGFloat = (maxSize.width - totalSpacing) / numberOfItems
+              let itemHeight: CGFloat = maxSize.height * 0.20
+              return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+          return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+      }
+      
+      
+      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          // segue to CreateItemViewController.
+       //   let catergory = categoires[indexPath.row]
+          let mainViewStoryboard = UIStoryboard(name: "MainView", bundle: nil)
+         // let createInstance = mainViewStoryboard.instantiateViewController(identifier: "CreateItemViewController") {
+            //  coder in
+           //   return CreateViewController()
+       //   }
+      
+         // present(UINavigationController(rootViewController:createInstance), animated: true)
+      }
+    
+    
+}
+
