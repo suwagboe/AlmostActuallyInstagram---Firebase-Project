@@ -9,6 +9,9 @@
 import UIKit
 
 class UploadAPhotoViewController: UIViewController {
+    
+    @IBOutlet weak var imageDescription: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

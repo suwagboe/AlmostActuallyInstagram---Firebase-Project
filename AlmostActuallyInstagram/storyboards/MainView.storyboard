@@ -16,15 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gbp-51-1Az">
-                                <rect key="frame" x="120" y="124" width="170" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="170" id="fKP-CC-60k"/>
-                                    <constraint firstAttribute="width" constant="170" id="upv-6m-Ncj"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="still butterflies.gif" translatesAutoresizingMaskIntoConstraints="NO" id="Gbp-51-1Az">
+                                <rect key="frame" x="20" y="56" width="132" height="127"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb2-tF-oNR">
-                                <rect key="frame" x="309" y="745" width="85" height="43"/>
+                                <rect key="frame" x="322" y="44" width="72" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
@@ -32,15 +29,8 @@
                                     <color key="titleColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Display Name " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVi-Dm-n4M">
-                                <rect key="frame" x="43" y="44" width="330" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.76778382060000006" green="0.33192589880000001" blue="0.20385590200000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ss2-B7-YK7">
-                                <rect key="frame" x="184" y="589" width="43" height="44"/>
+                                <rect key="frame" x="192" y="135" width="31" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -49,12 +39,51 @@
                                     <segue destination="3Tc-ts-Mvd" kind="show" id="Rzh-sZ-CsL"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ixm-Hu-ihf">
+                                <rect key="frame" x="0.0" y="253" width="414" height="560"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="S9U-l2-giT">
+                                    <size key="itemSize" width="345" height="239"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Xc2-gQ-bnA">
+                                        <rect key="frame" x="34.5" y="0.0" width="345" height="239"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9hA-QS-l4o">
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="239"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kisspng-butterfly-clip-art-tattoo-art-purple-5c9a017ed55419.3310086815535967988738" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-xJ-ngs">
+                                                    <rect key="frame" x="53" y="27" width="240" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="caption" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1M-DE-vs3">
+                                                    <rect key="frame" x="53" y="177" width="240" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.76778382060000006" green="0.33192589880000001" blue="0.20385590200000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <size key="customSize" width="345" height="239"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Display Name " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVi-Dm-n4M">
+                                <rect key="frame" x="149" y="92" width="117" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="Gbp-51-1Az" firstAttribute="top" secondItem="eUC-5z-0SB" secondAttribute="top" constant="80" id="65F-Lu-bzr"/>
-                            <constraint firstItem="Gbp-51-1Az" firstAttribute="leading" secondItem="eUC-5z-0SB" secondAttribute="leading" constant="120" id="8iF-Z1-WVr"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="eUC-5z-0SB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="profile" id="XHn-wd-D1c"/>
@@ -138,6 +167,7 @@
                 <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="tD6-Vs-KUk" customClass="TabViewController" customModule="AlmostActuallyInstagram" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3U0-TE-xyA">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -145,34 +175,69 @@
                         <color key="selectedImageTintColor" red="0.88835757969999996" green="0.5663116574" blue="0.085880495609999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <segue destination="c9W-Kn-dVg" kind="relationship" relationship="viewControllers" id="B0P-1i-gEh"/>
+                        <segue destination="bQR-ay-byy" kind="relationship" relationship="viewControllers" id="B0P-1i-gEh"/>
                         <segue destination="8Dr-ra-Iep" kind="relationship" relationship="viewControllers" id="0Pe-7e-Esu"/>
-                        <segue destination="9ZX-76-HdK" kind="relationship" relationship="viewControllers" id="IvE-03-qfu"/>
+                        <segue destination="e1C-jm-xkd" kind="relationship" relationship="viewControllers" id="IvE-03-qfu"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxw-Cx-8no" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-751" y="-26"/>
         </scene>
-        <!--feed-->
+        <!--Photo Collection View Controller-->
         <scene sceneID="Weg-9y-oQb">
             <objects>
                 <viewController id="9ZX-76-HdK" customClass="PhotoCollectionViewController" customModule="AlmostActuallyInstagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CcE-rq-N2J">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sJF-fR-js4">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0R4-pL-VbT">
+                                    <size key="itemSize" width="279" height="321"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Pam-1u-ISk">
+                                        <rect key="frame" x="67.5" y="0.0" width="279" height="321"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wD6-kf-iSp">
+                                            <rect key="frame" x="0.0" y="0.0" width="279" height="321"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue background butterflies.gif" translatesAutoresizingMaskIntoConstraints="NO" id="mUm-cx-Lg6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="279" height="254"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="caption" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtO-j2-FYg">
+                                                    <rect key="frame" x="0.0" y="262" width="271" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <color key="textColor" red="0.76778382060000006" green="0.33192589880000001" blue="0.20385590200000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="279" height="321"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="k16-qb-M4A"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="feed" image="square.and.arrow.up" catalog="system" id="7Pq-Ss-CeR">
-                        <color key="badgeColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="gGX-Gb-Ivf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQT-wQ-PsK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="-688"/>
+            <point key="canvasLocation" x="1905.7971014492755" y="-688.39285714285711"/>
         </scene>
-        <!--new olnw-->
+        <!--show the world what you found -->
         <scene sceneID="EmS-0Z-DVS">
             <objects>
                 <viewController id="c9W-Kn-dVg" customClass="UploadAPhotoViewController" customModule="AlmostActuallyInstagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -180,65 +245,92 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q47-fp-qCn">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue background butterflies.gif" translatesAutoresizingMaskIntoConstraints="NO" id="cLt-gq-46x">
+                                <rect key="frame" x="63" y="171" width="285" height="404"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hiB-Yo-ygc">
-                                    <size key="itemSize" width="345" height="270"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ltX-Fe-ihG">
-                                        <rect key="frame" x="34.5" y="0.0" width="345" height="270"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LyM-Qh-LHl">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="270"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="63056EA6-539E-41CD-9FF2-B77826BFA99A" translatesAutoresizingMaskIntoConstraints="NO" id="7Ti-mA-pVz">
-                                                    <rect key="frame" x="39" y="0.0" width="254" height="199"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="200" id="dox-Il-aad"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of butterfly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFy-HM-JnS">
-                                                    <rect key="frame" x="39" y="226" width="254" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="7Ti-mA-pVz" firstAttribute="leading" secondItem="LyM-Qh-LHl" secondAttribute="leading" constant="40" id="Aip-36-P8z"/>
-                                                <constraint firstItem="7Ti-mA-pVz" firstAttribute="top" secondItem="LyM-Qh-LHl" secondAttribute="top" constant="20" symbolic="YES" id="LBM-UF-cfh"/>
-                                                <constraint firstItem="jFy-HM-JnS" firstAttribute="leading" secondItem="LyM-Qh-LHl" secondAttribute="leading" constant="40" id="Lgo-MB-Y4d"/>
-                                                <constraint firstAttribute="trailing" secondItem="7Ti-mA-pVz" secondAttribute="trailing" constant="40" id="Oje-uR-Oxf"/>
-                                                <constraint firstItem="jFy-HM-JnS" firstAttribute="top" secondItem="7Ti-mA-pVz" secondAttribute="bottom" constant="25" id="cCM-sN-l8V"/>
-                                                <constraint firstAttribute="trailing" secondItem="jFy-HM-JnS" secondAttribute="trailing" constant="40" id="dwY-td-12s"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="345" height="270"/>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="click and hold to get the picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhH-1c-7vO">
+                                <rect key="frame" x="74" y="124" width="267" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" red="0.76778382060000006" green="0.33192589880000001" blue="0.20385590200000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F9t-L8-fLV">
+                                <rect key="frame" x="63" y="636" width="285" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="tell us what happend below " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWU-Fk-fh7">
+                                <rect key="frame" x="95" y="607" width="214" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.76778382060000006" green="0.33192589880000001" blue="0.20385590200000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <color key="tintColor" red="0.76778382060000006" green="0.33192589880000001" blue="0.20385590200000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="ELa-1w-KOo"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="new olnw" id="fIZ-hd-6zM"/>
+                    <navigationItem key="navigationItem" title="show the world what you found " id="bky-vf-Vbi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOZ-oV-BHY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1910.144927536232" y="-26.116071428571427"/>
+        </scene>
+        <!--feed-->
+        <scene sceneID="0qa-tL-jYW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e1C-jm-xkd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="feed" image="square.and.arrow.up" catalog="system" id="7Pq-Ss-CeR">
+                        <color key="badgeColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5oS-1q-FGq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9ZX-76-HdK" kind="relationship" relationship="rootViewController" id="sQu-4c-DWf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4D1-97-sh3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="995.65217391304361" y="-688.39285714285711"/>
+        </scene>
+        <!--new olnw-->
+        <scene sceneID="ypl-ka-2XA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bQR-ay-byy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="new olnw" id="fIZ-hd-6zM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0kr-3T-ahO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.96725517510000003" green="0.87069970370000005" blue="0.86666458850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.51003527640000001" green="0.72183841469999999" blue="0.87061291929999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="c9W-Kn-dVg" kind="relationship" relationship="rootViewController" id="rZe-06-hyg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EyD-m5-CGq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1000.0000000000001" y="-26.116071428571427"/>
         </scene>
     </scenes>
     <resources>
-        <image name="63056EA6-539E-41CD-9FF2-B77826BFA99A" width="250" height="281"/>
+        <image name="blue background butterflies.gif" width="250" height="319"/>
+        <image name="kisspng-butterfly-clip-art-tattoo-art-purple-5c9a017ed55419.3310086815535967988738" width="900" height="700"/>
         <image name="pencil.and.outline" catalog="system" width="64" height="58"/>
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
+        <image name="still butterflies.gif" width="1080" height="1080"/>
     </resources>
 </document>
