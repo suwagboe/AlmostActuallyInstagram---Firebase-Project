@@ -276,8 +276,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="show the world what you found " id="bky-vf-Vbi"/>
                     <connections>
-                        <outlet property="image" destination="cLt-gq-46x" id="LkO-sB-ReW"/>
-                        <outlet property="imageDescription" destination="F9t-L8-fLV" id="Zqt-2f-SCH"/>
+                        <outlet property="butterflyImage" destination="cLt-gq-46x" id="koF-0O-pN6"/>
+                        <outlet property="textField" destination="F9t-L8-fLV" id="Zqt-2f-SCH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOZ-oV-BHY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

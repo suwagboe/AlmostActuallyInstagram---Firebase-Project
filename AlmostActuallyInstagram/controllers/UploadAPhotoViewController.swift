@@ -12,7 +12,7 @@ class UploadAPhotoViewController: UIViewController {
     
     
     @IBOutlet weak var butterflyImage: UIImageView!
-    @IBOutlet weak var imageDescription: UITextField!
+    @IBOutlet weak var textField: UITextField!
     
     private lazy var imagePickerController: UIImagePickerController = {
        let picker = UIImagePickerController()
@@ -34,11 +34,17 @@ class UploadAPhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        configureView()
+    }
+    
+    private func configureView(){
+        butterflyImage.isUserInteractionEnabled = true
+        butterflyImage.addGestureRecognizer(longPressGesture)
+        textField.delegate = self
     }
     
     @objc private func showPhotoOptions() {
-        let alertController = UIAlertController(title: "Where is the photo", message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "please choose a moment", message: nil, preferredStyle: .actionSheet)
         
         let cameraAction = UIAlertAction(title: "capture the moment live", style: .default) { (action) in
             self.imagePickerController.sourceType = .camera
@@ -50,7 +56,7 @@ class UploadAPhotoViewController: UIViewController {
             self.present(self.imagePickerController, animated: true)
         }
         
-        let cancelAction = UIAlertAction(title: "", style: .cancel)
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
           
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             alertController.addAction(cameraAction)
@@ -59,11 +65,43 @@ class UploadAPhotoViewController: UIViewController {
         alertController.addAction(photoLibrary)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
-        
        }
 
     
     
 
 
+}
+
+extension UploadAPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("couldnt attain original image")
+        }
+    selectedImage = image
+        // want it to dismiss once its finished
+        dismiss(animated: true)
+    }
+}
+
+extension UploadAPhotoViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text?.isEmpty == true {
+            //showAlert(title: "Youre not done yet", message: "Hey.. sorry to say it but you need to type something into the description or else how will we know.. ")
+            print("they haven't filled out the caption")
+        } else {
+            guard let text = textField.text else {
+                return false
+            }
+           // editingText = text
+           // print(editingText)
+        }
+        
+        
+        textField.resignFirstResponder()
+        return true
+    }
 }
