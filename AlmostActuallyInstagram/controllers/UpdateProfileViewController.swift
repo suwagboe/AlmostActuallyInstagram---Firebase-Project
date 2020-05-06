@@ -19,7 +19,19 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButton.layer.cornerRadius = updateButton.frame.size.width / 2
+        updateUI()
     }
+    
+    private func updateUI(){
+           // guard let user = Auth.auth().currentUser else {
+//                       return
+//                   }
+//                   emailLabel.text = user.email
+//                   displayNameTextField.text = user.displayName
+//            profilleImageView.kf.setImage(with: user.photoURL)
+                    //user.phoneNumber
+                   // user.photoURL
+        }
 
     @IBAction func dismissSecondVC(_ sender: AnyObject) {
          

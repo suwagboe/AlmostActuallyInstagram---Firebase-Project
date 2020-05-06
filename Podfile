@@ -8,6 +8,12 @@ target 'AlmostActuallyInstagram' do
   # Pods for AlmostActuallyInstagram
    pod 'Firebase/Analytics'
    pod 'Firebase/Auth'
+   
+   #Databasepods
+    pod 'Firebase/Firestore'
+    pod 'FirebaseFirestoreSwift'
+    pod 'Firebase/Storage'
+    pod 'Kingfisher'
 
   target 'AlmostActuallyInstagramTests' do
     inherit! :search_paths

@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+  
     
     @IBAction func signout(_ sender: UIButton) {
         // signout logic goes here
@@ -43,6 +44,11 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
               }
     }
     
+    private func fecthItems() {
+        
+    }
+    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let updateVC = segue.destination as? UpdateProfileViewController
         updateVC?.transitioningDelegate = self
