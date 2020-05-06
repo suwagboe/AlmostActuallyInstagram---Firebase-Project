@@ -133,6 +133,7 @@
 		552A259F2412B74200116374 /* AlmostActuallyInstagram */ = {
 			isa = PBXGroup;
 			children = (
+				558723A024622F4A00A7F2D8 /* postModel.swift */,
 				552A25DE2412CCB100116374 /* extension */,
 				552A25CB2412C3A400116374 /* firebase services */,
 				552A25C52412BCE500116374 /* storyboards */,
@@ -140,7 +141,6 @@
 				552A25C42412BBC900116374 /* supporting files */,
 				552A25AE2412B74600116374 /* Info.plist */,
 				5587239E24622E4800A7F2D8 /* GoogleService-Info.plist */,
-				558723A024622F4A00A7F2D8 /* postModel.swift */,
 			);
 			path = AlmostActuallyInstagram;
 			sourceTree = "<group>";

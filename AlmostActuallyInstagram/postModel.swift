@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-struct Category {
+struct newPost {
   let image: UIImage
-  let name: String
+  let description: String
     
 }

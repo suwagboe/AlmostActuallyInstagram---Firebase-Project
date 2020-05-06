@@ -12,11 +12,35 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
 
     let transition = CircularTransition()
     
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var editProfile: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+    }
+    
+    private func configureView(){
         editProfile.layer.cornerRadius = editProfile.frame.size.width / 2
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
+    
+    @IBAction func signout(_ sender: UIButton) {
+        // signout logic goes here
+        do {
+                 // try Auth.auth().signOut()
+            UIViewController.showViewController(storyboardName: "loginView", viewControllerId: "LoginViewController")
+              }catch{
+                  DispatchQueue.main.async {
+                      //self.showAlert(title: "Error siging out", message: "\(error.localizedDescription)")
+                  }
+                print("\(error)")
+              }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -29,7 +53,6 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
            transition.transitionMode = .present
            transition.startingPoint = editProfile.center
            transition.circleColor = editProfile.backgroundColor!
-           
            return transition
        }
        
@@ -42,4 +65,23 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
        }
     
 
+}
+
+extension ProfileViewController: UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
+               
+               return cell
+    }
+    
+    
+}
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+    
 }

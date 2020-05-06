@@ -61,12 +61,25 @@ class UploadAPhotoViewController: UIViewController {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             alertController.addAction(cameraAction)
         }
-        
         alertController.addAction(photoLibrary)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
        }
-
+    
+    @IBAction func Post(_ sender: UIButton) {
+        guard let seletedImage = butterflyImage.image else {
+            print("the image they selected is not avaiable")
+            return
+        }
+        guard let caption = textField.text else {
+           print("they in things but they are not avaible from the text field ")
+            return
+        }
+        var createdPost = newPost(image: seletedImage, description: caption)
+        
+        // want to gain access to firebase data to gain push this create post
+        
+    }
     
     
 
