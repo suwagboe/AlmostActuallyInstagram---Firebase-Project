@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class UploadAPhotoViewController: UIViewController {
     
@@ -14,9 +16,13 @@ class UploadAPhotoViewController: UIViewController {
     @IBOutlet weak var butterflyImage: UIImageView!
     @IBOutlet weak var textField: UITextField!
     
+    private let dbService = DatabaseServices()
+    private let storageService = StorageService()
+
+    
     private lazy var imagePickerController: UIImagePickerController = {
        let picker = UIImagePickerController()
-     //   picker.delegate = self
+        picker.delegate = self
         return picker
     }()
     
@@ -67,24 +73,81 @@ class UploadAPhotoViewController: UIViewController {
        }
     
     @IBAction func Post(_ sender: UIButton) {
+        // they cant post something until they have a display name so it will prompt them
+// Auth.auth() user is different
+        guard let displayName = Auth.auth().currentUser?.displayName else {
+                   //showAlert(title: "Incomplete Profile", message: "Please complete your profile")
+            print("Please complete your profile!!!! put the alert extension")
+            print("displayname is: \(Auth.auth().currentUser?.displayName) ")
+               return
+               }
+
         guard let seletedImage = butterflyImage.image else {
             print("the image they selected is not avaiable")
             return
         }
-        guard let caption = textField.text else {
+        guard let caption = textField.text, !caption.isEmpty else {
            print("they in things but they are not avaible from the text field ")
             return
         }
-        var createdPost = newPost(image: seletedImage, description: caption)
+            let resizedImage = UIImage.resizeImage(originalImage: seletedImage, rect: butterflyImage.bounds)
+        
+      //  var createdPost = newPost(imageURL: "", caption: "", postedDate: Date, userID: "", userImage: "", userName: "")
         
         // want to gain access to firebase data to gain push this create post
-        
+        dbService.createAPost(displayName: displayName, caption: caption, completion:   { [weak self]
+                  (result) in
+                  switch result {
+                  case .failure(let error):
+                      print(error)
+                  case .success(let docId):
+                      self?.uploadPhoto(photo: resizedImage, documentId: docId)
+                  }
+              })
+        dismiss(animated: true)
+
+    }
+    
+    private func uploadPhoto(photo: UIImage, documentId: String){
+        // because we set the parameters to nil when the function is called again it is  not necessary to use the parameter, like below we only want the itemID because that is the only thing avaliable in this controller.. we dont have access to userID here. .
+        storageService.uploadPhoto(userID: documentId, image: photo) {
+            (result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+               // self.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
+            case .success(let url):
+                // when the item is CREATED we do not have access to the url yet
+                self.updatePostURL(url, documentId: documentId)
+            }
+        }
+    }
+    
+    private func updatePostURL(_ url: URL, documentId: String){
+        // update an exisiting doc on firebase
+        Firestore.firestore().collection(DatabaseServices.postCollection).document(documentId).updateData(["imageURL": url.absoluteString]) { [weak self]
+            // firebase only accepts a string
+            //
+            (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                  //  self?.showAlert(title: "failed to update item", message: "\(error.localizedDescription)")
+                    print(error.localizedDescription)
+                }
+            } else {
+                // everything went okay
+                DispatchQueue.main.async {
+                    self?.dismiss(animated: true)
+                }
+                print("all went well with the update")
+            }
+        }
     }
     
     
 
 
-}
+} // end of class
 
 extension UploadAPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     

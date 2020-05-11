@@ -13,7 +13,7 @@ target 'AlmostActuallyInstagram' do
     pod 'Firebase/Firestore'
     pod 'FirebaseFirestoreSwift'
     pod 'Firebase/Storage'
-    pod 'Kingfisher'
+    pod 'Kingfisher' 
 
   target 'AlmostActuallyInstagramTests' do
     inherit! :search_paths

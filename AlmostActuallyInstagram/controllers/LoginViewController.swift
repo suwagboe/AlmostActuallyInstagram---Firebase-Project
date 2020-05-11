@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 enum AccountState {
     case existingUser
@@ -26,6 +27,8 @@ class LoginViewController: UIViewController {
       private var accountState: AccountState = .existingUser
       
       private var authSession = AuthenticationSession()
+    
+    private var database = DatabaseServices()
       
       override func viewDidLoad() {
           super.viewDidLoad()
@@ -54,31 +57,49 @@ class LoginViewController: UIViewController {
                   case .success:
                       DispatchQueue.main.async {
                           self?.navigateToMainView()
-                          
                       }
                   }
               }
           } else {
-              authSession.createNewUser(email: email, password: password) { [weak self] (result) in
+              authSession.createNewUser(email: email, password: password) {
+                (result) in
                   
                   switch result {
                   case .failure(let error):
                       DispatchQueue.main.async {
-                          self?.errorLabel.text = "\(error.localizedDescription)"
-                          self?.errorLabel.textColor = .red
+                          self.errorLabel.text = "\(error.localizedDescription)"
+                          self.errorLabel.textColor = .red
                       }
-                  case .success:
-                      DispatchQueue.main.async {
-                          self?.navigateToMainView()
-                          
-                      }
+                  case .success(let authDataResult):
+                    self.createDatabaseUser(authDataResult: authDataResult)
+//                      DispatchQueue.main.async {
+//                          self?.navigateToMainView()
+//
+//                      }
                   }
               }
           }
       }
       
+    private func createDatabaseUser(authDataResult: AuthDataResult) {
+         database.createDatabaseUser(authDataResult: authDataResult) { [weak self] (result) in
+             switch result {
+             case .failure(let error):
+                 DispatchQueue.main.async {
+                     //self?.showAlert(title: "Account error", message: error.localizedDescription)
+                    print(error.localizedDescription)
+                 }
+             case .success:
+                 DispatchQueue.main.async {
+                     self?.navigateToMainView()
+                 }
+             }
+             
+         }
+     }
+    
       private func navigateToMainView() {
-          UIViewController.showViewController(storyboardName: "MainView", viewControllerId: "MainTabBarController")
+          UIViewController.showViewController(storyboardName: "MainView", viewControllerId: "TabBarController")
         //print("should go to main view")
       }
       

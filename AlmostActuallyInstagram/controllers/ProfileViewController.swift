@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController, UIViewControllerTransitioningDelegate{
 
     let transition = CircularTransition()
-    
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var displayName: UILabel!
@@ -19,9 +19,42 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var collectionView: UICollectionView!
     
     
+    private var photosCollection = [newPost]() {
+        didSet{
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        updateUserInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+                updateUserInfo()
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        updateUserInfo()
+//    }
+    
+    private func updateUserInfo(){
+        guard let user = Auth.auth().currentUser else {
+                          return
+                      }
+                     // emailLabel.text = user.email
+        if user.displayName == nil {
+            displayName.text = "please input a display name"
+            profileImage.image = UIImage(named: "still butterflies.gif")
+        } else {
+            displayName.text = user.displayName
+                       profileImage.kf.setImage(with: user.photoURL)
+        }
+                  
     }
     
     private func configureView(){
@@ -31,11 +64,12 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     }
   
     
+    
     @IBAction func signout(_ sender: UIButton) {
         // signout logic goes here
         do {
-                 // try Auth.auth().signOut()
-            UIViewController.showViewController(storyboardName: "loginView", viewControllerId: "LoginViewController")
+                 try Auth.auth().signOut()
+            UIViewController.showViewController(storyboardName: "LoginView", viewControllerId: "LoginViewController")
               }catch{
                   DispatchQueue.main.async {
                       //self.showAlert(title: "Error siging out", message: "\(error.localizedDescription)")
@@ -80,7 +114,7 @@ extension ProfileViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photosCell", for: indexPath)
                
                return cell
     }
@@ -89,5 +123,8 @@ extension ProfileViewController: UICollectionViewDataSource{
 }
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+  
+    
+    
     
 }

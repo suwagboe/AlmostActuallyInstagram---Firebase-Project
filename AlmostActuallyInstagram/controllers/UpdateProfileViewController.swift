@@ -7,85 +7,171 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Kingfisher
 
 class UpdateProfileViewController: UIViewController, UIViewControllerTransitioningDelegate {
-
-    @IBOutlet weak var collectionView: UICollectionView!
-
+    
+    
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var updateButton: UIButton!
     
+    private let storageService = StorageService()
+    private let databaseService = DatabaseServices()
     private let transition = CircularTransition()
+    
+    private lazy var imagePickerController: UIImagePickerController = {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        return picker
+    }()
+    
+    private var convertImageViewToImage: UIImage? {
+        didSet{
+            self.profileImage.image = self.convertImageViewToImage
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateButton.layer.cornerRadius = updateButton.frame.size.width / 2
-        updateUI()
+        textField.delegate = self
+        configureUI()
     }
     
-    private func updateUI(){
-           // guard let user = Auth.auth().currentUser else {
-//                       return
-//                   }
-//                   emailLabel.text = user.email
-//                   displayNameTextField.text = user.displayName
-//            profilleImageView.kf.setImage(with: user.photoURL)
-                    //user.phoneNumber
-                   // user.photoURL
+    
+    private func configureUI(){
+                guard let user = Auth.auth().currentUser else {
+            return
         }
-
-    @IBAction func dismissSecondVC(_ sender: AnyObject) {
-         
-         self.dismiss(animated: true, completion: nil)
-     
-     }
-    
-}
-
-
-extension UploadAPhotoViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ":", for: indexPath)
+        emailLabel.text = user.email
+        textField.text = user.displayName
+        profileImage.kf.setImage(with: user.photoURL)
         
-        return cell
+    }
+    
+    @IBAction func dismissSecondVC(_ sender: AnyObject) {
+        gatherUpdateInfo()
     }
     
     
-    
-}
-
-extension UploadAPhotoViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let maxSize = UIScreen.main.bounds
-         let spacingBetweenItems: CGFloat = 11
-              let numberOfItems: CGFloat = 3
-              let totalSpacing: CGFloat = (2 * spacingBetweenItems) + (numberOfItems - 1) * spacingBetweenItems
-              let itemWidth: CGFloat = (maxSize.width - totalSpacing) / numberOfItems
-              let itemHeight: CGFloat = maxSize.height * 0.20
-              return CGSize(width: itemWidth, height: itemHeight)
+    @IBAction func addPhotoButton(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "please choose a moment", message: nil, preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "capture the moment live", style: .default) { (action) in
+            self.imagePickerController.sourceType = .camera
+            self.present(self.imagePickerController, animated: true)
+        }
+        
+        let photoLibrary = UIAlertAction(title: "look at your photos", style: .default) { (action) in
+            self.imagePickerController.sourceType = .photoLibrary
+            self.present(self.imagePickerController, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            alertController.addAction(cameraAction)
+        }
+        alertController.addAction(photoLibrary)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-          return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-      }
-      
-      
-      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          // segue to CreateItemViewController.
-       //   let catergory = categoires[indexPath.row]
-          let mainViewStoryboard = UIStoryboard(name: "MainView", bundle: nil)
-         // let createInstance = mainViewStoryboard.instantiateViewController(identifier: "CreateItemViewController") {
-            //  coder in
-           //   return CreateViewController()
-       //   }
-      
-         // present(UINavigationController(rootViewController:createInstance), animated: true)
-      }
     
+    private func gatherUpdateInfo(){
+        guard let displayName = textField.text, !displayName.isEmpty, let seletedImage = convertImageViewToImage else {
+            print("missing fields cannot be found please try again")
+            return
+        }
+        
+        guard let user = Auth.auth().currentUser else { return }
+        
+        let resizedImage = UIImage.resizeImage(originalImage: seletedImage, rect: profileImage.bounds)
+        
+        updateStorageService(user: user, image: resizedImage, displayName: displayName)
+        
+    }
     
+    private func updateStorageService(user: User, image: UIImage, displayName: String){
+        storageService.uploadPhoto(userID: user.uid, image: image) {  [weak self]
+            (result) in
+            switch result{
+            case .failure(let error):
+                //                DispatchQueue.main.async {
+                //                    self?.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
+                //                }
+                print("this is wrong inside of storage service b/c \(error.localizedDescription)")
+            case .success(let url):
+                self?.updateDatabaseUser(displayName: displayName, photoURL: url.absoluteString)
+                print("the request went through and the displayName and url have been updated")
+                
+            }
+        }
+        
+    }
+    private func updateDatabaseUser(displayName: String, photoURL: String) {
+        print("inside updateDatabaseUser")
+        
+        databaseService.updateDatabaseUser(displayName: displayName, photoURL: photoURL) {
+            
+            (result) in
+            switch result {
+            case .failure(let error):
+                print("failed to update db user: \(error)")
+            case .success:
+                self.request(displayName: displayName, url: URL(fileURLWithPath: photoURL))
+                print("successfully updated db user")
+            }
+        }
+    }
+    
+    private func request(displayName: String, url: URL){
+        let request = Auth.auth().currentUser?.createProfileChangeRequest()
+        request?.displayName = displayName
+        request?.photoURL = url
+        // this saves the changes??
+        request?.commitChanges(completion: { [unowned self] (error) in
+            // unowned self, because it will only exsit when this controller exists...
+            if let error = error {
+                //MARK: Show alert
+                DispatchQueue.main.async {
+                    //  self?.showAlert(title: "Error updating profile", message: "Error changing Profile: \(error.localizedDescription)")
+                }
+                print("commitChange error: \(error.localizedDescription)")
+            } else {
+                DispatchQueue.main.async {
+                    //  self?.showAlert(title: "Profile Updated ", message: "Your Profile has been updated successfully")
+                    // dismiss the controller here
+                    self.dismiss(animated: true, completion: nil)
+
+                }
+                print("profile successfully updated ")
+            }
+        })
+    }
 }
 
+extension UpdateProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension UpdateProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("couldnt attain original image")
+        }
+        convertImageViewToImage = image
+        // want it to dismiss once its finished
+        dismiss(animated: true)
+    }
+}

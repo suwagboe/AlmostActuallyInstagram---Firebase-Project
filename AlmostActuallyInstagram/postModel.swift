@@ -7,10 +7,28 @@
 //
 
 import Foundation
-import UIKit
+import FirebaseFirestore
+
 
 struct newPost {
-  let image: UIImage
-  let description: String
+  let imageURL: String
+  let caption: String
+  let postedDate: Timestamp
+  let userID: String
+  let userDisplayImage: String
+  let displayName: String
     
+}
+
+
+extension newPost {
+   
+    init(_ dictionary: [String: Any]) {
+        self.imageURL = dictionary["imageURL"] as? String ?? "no imageURL "
+        self.caption = dictionary["caption"] as? String ?? "there is no caption"
+        self.postedDate = dictionary["postedDate"] as? Timestamp ?? Timestamp(date: Date())
+        self.userID = dictionary["userID"] as? String ?? "no user ID "
+        self.userDisplayImage = dictionary["userDisplayImage"] as? String ?? "no user Display Image"
+        self.displayName = dictionary["displayName"] as? String ?? " no display Name"
+    }
 }
