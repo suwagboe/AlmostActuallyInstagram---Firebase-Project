@@ -23,8 +23,8 @@ class PostCell: UICollectionViewCell {
     weak var delegate: PostCellDelegate?
 
         @IBOutlet weak var itemImageView: UIImageView!
-        @IBOutlet weak var itemNameLabel: UILabel!
-        @IBOutlet weak var sellerNameLabel: UILabel!
+        @IBOutlet weak var captionLabel: UILabel!
+        @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var dateLabel: UILabel!
        // @IBOutlet weak var priceLabel: UILabel!
     
@@ -40,9 +40,9 @@ class PostCell: UICollectionViewCell {
         
     override func layoutSubviews() {
         super.layoutSubviews()
-        sellerNameLabel.textColor = .systemPink
-        sellerNameLabel.addGestureRecognizer(tapGesture)
-        sellerNameLabel.isUserInteractionEnabled = true
+        userNameLabel.textColor = .black
+        userNameLabel.addGestureRecognizer(tapGesture)
+        userNameLabel.isUserInteractionEnabled = true
     }
         
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
@@ -53,7 +53,7 @@ class PostCell: UICollectionViewCell {
     
         public func configureCell(for post: newPost){
             currentItem = post
-            updateUI(imageURL: post.imageURL, sellerName: post.userID,
+            updateUI(imageURL: post.imageURL, userName: post.displayName,
                      //date: post.postedDate,
                  caption: post.caption)
         }
@@ -61,16 +61,17 @@ class PostCell: UICollectionViewCell {
         
     
     private func updateUI(imageURL: String,
-                          sellerName: String,
+                          userName: String,
                          // date: Timestamp,
                           caption: String ) {
         // todo: set up image, import kingfisher, install kingfisher via pods
                    itemImageView.kf.setImage(with: URL(string: imageURL))
-
-                  // itemNameLabel.text = itemName
-                   sellerNameLabel.text = "@\(sellerName)"
+                   captionLabel.text = " CAPTION: \(caption)"
+                   userNameLabel.text = "@\(userName)"
                  //  dateLabel.text = date.dateValue().dateStrin() // from the extension that we made.
                  //  priceLabel.text = "$\(price)"
+        
+
                    
     }
     }

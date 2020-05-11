@@ -16,6 +16,8 @@ class PhotoCollectionViewController: UIViewController {
     private let databaseService = DatabaseServices()
     
     private var listener: ListenerRegistration?
+    
+    private var postIt: newPost?
 
     private var photoCollection = [newPost]() {
         didSet{
@@ -45,7 +47,7 @@ class PhotoCollectionViewController: UIViewController {
                 }
             })
         }
-    
+
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillAppear(true)
             listener?.remove() // no longer are we listening for changes from Firebase
@@ -74,6 +76,10 @@ extension PhotoCollectionViewController: UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedCell", for: indexPath) as? PostCell else {
             fatalError("cant downcast as cell ")
         }
+        
+        cell.layer.cornerRadius = 50
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 3
             let post = photoCollection[indexPath.row]
             cell.configureCell(for: post)
             cell.delegate = self
@@ -84,20 +90,38 @@ extension PhotoCollectionViewController: UICollectionViewDataSource{
 }
 
 extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let maxSize = UIScreen.main.bounds
+    
+  //  (self.objKeypadCollectionView.frame.size.width/3)-10, height: (self.objKeypadCollectionView.frame.size.height/4)-10)
+  
+    /*
+    let width = (maxSize.width / 3) - 10
+    let height = (maxSize.height / 4 ) - 10
+    
+            return CGSize(width: width , height: height)
+ */
+               //let maxSize = UIScreen.main.bounds
+    return CGSize(width: maxSize.width * 0.7, height: maxSize.height * 0.50)
+
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+            return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        }
+        
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let post = photoCollection[indexPath.row]
                   
-                  // need to access the other storyboard to inject it into it
-//                  let storyboard = UIStoryboard(name: "MainView", bundle: nil)
-//                  let detailVC = storyboard.instantiateViewController(identifier: "ItemDetailController") { (coder) in
-                    //  return ItemDetailController(coder: coder, item: item)
-                      
-                //  }
-                  // notice if this controller is not embedded in a navController then it will not show the next controller even if the next controller that are seguing to is already embedded in a nav controller
-                  
-                  // all you need to do is embedd it.
-                //  navigationController?.pushViewController(detailVC, animated: true)
-
+       postIt = post
+        
+        guard let dv = storyboard?.instantiateViewController(identifier: "DetailController") as? PhotoDetailController else {
+                fatalError("could not access detailcontroller")
+            }
+                     dv.post = postIt
+        navigationController?.pushViewController(dv, animated: true)
     }
 }
 
