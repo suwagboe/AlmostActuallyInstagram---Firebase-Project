@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        updateUserInfo()
+       // updateUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,10 +42,12 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        updateUserInfo()
+     //   updateUserInfo()
         guard let user = Auth.auth().currentUser else {
                 return
             }
+        
+        
         listener = Firestore.firestore().collection(DatabaseServices.postCollection)
               .addSnapshotListener({[weak self ](snapshot, error) in
                   if let error = error {
@@ -57,7 +59,8 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
                       let posts = snapshot.documents.map {newPost($0.data()) }
                     
                     // MARK: Alex why is this not working
-                    self?.photosCollection = posts.filter { $0.userID == user.uid }
+                    self?.photosCollection = posts.filter { $0.userId == user.uid }
+                    
                   }
               })
     }
@@ -71,7 +74,8 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             profileImage.image = UIImage(named: "still butterflies.gif")
         } else {
             displayName.text = user.displayName
-            profileImage.kf.setImage(with: user.photoURL)
+            //profileImage.image = UIImage(named: "still butterflies.gif")
+            profileImage.kf.setImage(with: URL(string: "https://www.humanesociety.org/sites/default/files/styles/768x326/public/2018/08/kitten-440379.jpg"))
         }
                   
     }
@@ -101,7 +105,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         let updateVC = segue.destination as? UpdateProfileViewController
         updateVC?.transitioningDelegate = self
         updateVC?.modalPresentationStyle = .custom
-        updateUserInfo()
+      //  updateUserInfo()
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

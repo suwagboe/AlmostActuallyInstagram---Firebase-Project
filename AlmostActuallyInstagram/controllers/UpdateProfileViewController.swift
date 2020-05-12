@@ -85,7 +85,9 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
     
     private func gatherUpdateInfo(){
         guard let displayName = textField.text, !displayName.isEmpty, let seletedImage = convertImageViewToImage else {
-            print("missing fields cannot be found please try again")
+            DispatchQueue.main.async {
+                self.showAlert(title: "oh no", message: "missing fields cannot be found please try again")
+            }
             return
         }
         
@@ -115,8 +117,6 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
         
     }
     private func updateDatabaseUser(displayName: String, photoURL: String) {
-        print("inside updateDatabaseUser")
-        
         databaseService.updateDatabaseUser(displayName: displayName, photoURL: photoURL) {
             
             (result) in
@@ -136,23 +136,23 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
         request?.photoURL = url
         // this saves the changes??
         request?.commitChanges(completion: { [unowned self] (error) in
-            // unowned self, because it will only exsit when this controller exists...
             if let error = error {
-                //MARK: Show alert
                 DispatchQueue.main.async {
+                    print("show alert should be next")
                       self.showAlert(title: "Error updating profile", message: "Error changing Profile: \(error.localizedDescription)")
                 }
-               // print("commitChange error: \(error.localizedDescription)")
             } else {
+                // MARK: Alex why isnt this show alert working
                 DispatchQueue.main.async {
-                      self.showAlert(title: "Profile Updated ", message: "Your Profile has been updated successfully")
+                    self.showAlert(title: "Profile Updated", message: "Your Profile has been updated successfully") { alert in
+                        self.dismiss(animated: true, completion: nil)
+                        // spinner for user to see it loading
+                    }
                     // dismiss the controller here
+                               
                 }
                 
-                
-                self.dismiss(animated: true, completion: nil)
-
-               // print("profile successfully updated ")
+          
             }
         })
     }

@@ -20,6 +20,7 @@ class DatabaseServices{
     
     public func createAPost(displayName: String, caption: String,  completion: @escaping (Result <String, Error>) -> ()) {
            guard let user = Auth.auth().currentUser else { return }
+        
         let documentRef = db.collection(DatabaseServices.postCollection).document()
           
         db.collection(DatabaseServices.postCollection).document(documentRef.documentID).setData([
@@ -68,11 +69,16 @@ class DatabaseServices{
                }
            }
     func updateDatabaseUser(displayName: String, photoURL: String, completion: @escaping (Result<Bool, Error>) -> ()) {
-             guard let user = Auth.auth().currentUser else { return }
+        
+        
+            guard let user = Auth.auth().currentUser else { return }
+        
+        
              db.collection(DatabaseServices.userCollection).document(user.uid).updateData(["photoURL" : photoURL, "displayName": displayName]) { (error) in
                  if let error = error {
                      completion(.failure(error))
                  } else {
+                    
                     print("inside of the database the update user was successful")
                      completion(.success(true))
                  }
