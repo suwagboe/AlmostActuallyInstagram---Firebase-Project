@@ -72,13 +72,16 @@ class UploadAPhotoViewController: UIViewController {
         present(alertController, animated: true)
        }
     
+   
+    
     @IBAction func Post(_ sender: UIButton) {
         // they cant post something until they have a display name so it will prompt them
 // Auth.auth() user is different
         guard let displayName = Auth.auth().currentUser?.displayName else {
-                   //showAlert(title: "Incomplete Profile", message: "Please complete your profile")
-            print("Please complete your profile!!!! put the alert extension")
-            print("displayname is: \(Auth.auth().currentUser?.displayName) ")
+            DispatchQueue.main.async {
+                self.showAlert(title: "Incomplete Profile", message: "Please complete your profile")
+            }
+  
                return
                }
 
@@ -92,9 +95,6 @@ class UploadAPhotoViewController: UIViewController {
         }
             let resizedImage = UIImage.resizeImage(originalImage: seletedImage, rect: butterflyImage.bounds)
         
-      //  var createdPost = newPost(imageURL: "", caption: "", postedDate: Date, userID: "", userImage: "", userName: "")
-        
-        // want to gain access to firebase data to gain push this create post
         dbService.createAPost(displayName: displayName, caption: caption, completion:   { [weak self]
                   (result) in
                   switch result {
@@ -109,13 +109,12 @@ class UploadAPhotoViewController: UIViewController {
     }
     
     private func uploadPhoto(photo: UIImage, documentId: String){
-        // because we set the parameters to nil when the function is called again it is  not necessary to use the parameter, like below we only want the itemID because that is the only thing avaliable in this controller.. we dont have access to userID here. .
         storageService.uploadPhoto(userID: documentId, image: photo) {
             (result) in
             switch result {
             case .failure(let error):
                 print(error.localizedDescription)
-               // self.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
+                self.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
             case .success(let url):
                 // when the item is CREATED we do not have access to the url yet
                 self.updatePostURL(url, documentId: documentId)
@@ -126,16 +125,13 @@ class UploadAPhotoViewController: UIViewController {
     private func updatePostURL(_ url: URL, documentId: String){
         // update an exisiting doc on firebase
         Firestore.firestore().collection(DatabaseServices.postCollection).document(documentId).updateData(["imageURL": url.absoluteString]) { [weak self]
-            // firebase only accepts a string
-            //
             (error) in
             if let error = error {
                 DispatchQueue.main.async {
-                  //  self?.showAlert(title: "failed to update item", message: "\(error.localizedDescription)")
-                    print(error.localizedDescription)
+                    self?.showAlert(title: "failed to update item", message: "\(error.localizedDescription)")
+                   // print(error.localizedDescription)
                 }
             } else {
-                // everything went okay
                 DispatchQueue.main.async {
                     self?.dismiss(animated: true)
                 }
@@ -143,10 +139,6 @@ class UploadAPhotoViewController: UIViewController {
             }
         }
     }
-    
-    
-
-
 } // end of class
 
 extension UploadAPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -157,7 +149,6 @@ extension UploadAPhotoViewController: UIImagePickerControllerDelegate, UINavigat
             fatalError("couldnt attain original image")
         }
     selectedImage = image
-        // want it to dismiss once its finished
         dismiss(animated: true)
     }
 }
@@ -166,12 +157,14 @@ extension UploadAPhotoViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text?.isEmpty == true {
-            //showAlert(title: "Youre not done yet", message: "Hey.. sorry to say it but you need to type something into the description or else how will we know.. ")
-            print("they haven't filled out the caption")
-        } else {
-            guard let text = textField.text else {
-                return false
+            DispatchQueue.main.async {
+                self.showAlert(title: "Youre not done yet", message: "Hey.. sorry to say it but you need to type something into the description or else how will we know.. ")
+                
             }
+                   } else {
+          //  guard let text = textField.text else {
+            //    return false
+           // }
            // editingText = text
            // print(editingText)
         }

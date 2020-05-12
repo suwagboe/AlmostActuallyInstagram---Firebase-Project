@@ -33,27 +33,25 @@ class PhotoCollectionViewController: UIViewController {
             .addSnapshotListener({[weak self ](snapshot, error) in
                 if let error = error {
                     DispatchQueue.main.async {
-                      //  self?.showAlert(title: "Firestore Error", message: "\(error.localizedDescription)")
-                        print(error.localizedDescription)
+                        DispatchQueue.main.async {
+                            self?.showAlert(title: "Firestore Error", message: "\(error.localizedDescription)") }
+                     //   print(error.localizedDescription)
                     }
                 } else if let snapshot = snapshot {
                     print("there are \(snapshot.documents.count) items for sell")
                     let posts = snapshot.documents.map {newPost($0.data()) }
-                    // maps for thru each element in the array
-                    // each element represents $0
-                    //$0.data is a dictonary
-                    // for item in item is item and that is $0.data
-                    self?.photoCollection = posts
+                    
+                    // MARK: Alex why is this not working 
+                    self?.photoCollection = posts  //.filter //{ $0.postedDate < $1.postedDate }
                 }
             })
         }
 
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillAppear(true)
-            listener?.remove() // no longer are we listening for changes from Firebase
+            listener?.remove()
         }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -63,7 +61,6 @@ class PhotoCollectionViewController: UIViewController {
           collectionView.dataSource = self
           collectionView.delegate = self
       }
-    
 }
 
 extension PhotoCollectionViewController: UICollectionViewDataSource{
@@ -126,7 +123,7 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotoCollectionViewController: PostCellDelegate{
     func didSelectSellerName(_ postCell: PostCell, item: newPost) {
-        ///
+
     }
     
     

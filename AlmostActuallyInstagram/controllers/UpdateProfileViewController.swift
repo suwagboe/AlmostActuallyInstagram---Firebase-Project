@@ -102,10 +102,10 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
             (result) in
             switch result{
             case .failure(let error):
-                //                DispatchQueue.main.async {
-                //                    self?.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
-                //                }
-                print("this is wrong inside of storage service b/c \(error.localizedDescription)")
+                                DispatchQueue.main.async {
+                                    self?.showAlert(title: "Error uploading photo", message: "\(error.localizedDescription)")
+                                }
+               // print("this is wrong inside of storage service b/c \(error.localizedDescription)")
             case .success(let url):
                 self?.updateDatabaseUser(displayName: displayName, photoURL: url.absoluteString)
                 print("the request went through and the displayName and url have been updated")
@@ -140,17 +140,19 @@ class UpdateProfileViewController: UIViewController, UIViewControllerTransitioni
             if let error = error {
                 //MARK: Show alert
                 DispatchQueue.main.async {
-                    //  self?.showAlert(title: "Error updating profile", message: "Error changing Profile: \(error.localizedDescription)")
+                      self.showAlert(title: "Error updating profile", message: "Error changing Profile: \(error.localizedDescription)")
                 }
-                print("commitChange error: \(error.localizedDescription)")
+               // print("commitChange error: \(error.localizedDescription)")
             } else {
                 DispatchQueue.main.async {
-                    //  self?.showAlert(title: "Profile Updated ", message: "Your Profile has been updated successfully")
+                      self.showAlert(title: "Profile Updated ", message: "Your Profile has been updated successfully")
                     // dismiss the controller here
-                    self.dismiss(animated: true, completion: nil)
-
                 }
-                print("profile successfully updated ")
+                
+                
+                self.dismiss(animated: true, completion: nil)
+
+               // print("profile successfully updated ")
             }
         })
     }

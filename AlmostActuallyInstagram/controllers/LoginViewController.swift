@@ -72,10 +72,6 @@ class LoginViewController: UIViewController {
                       }
                   case .success(let authDataResult):
                     self.createDatabaseUser(authDataResult: authDataResult)
-//                      DispatchQueue.main.async {
-//                          self?.navigateToMainView()
-//
-//                      }
                   }
               }
           }
@@ -86,8 +82,8 @@ class LoginViewController: UIViewController {
              switch result {
              case .failure(let error):
                  DispatchQueue.main.async {
-                     //self?.showAlert(title: "Account error", message: error.localizedDescription)
-                    print(error.localizedDescription)
+                     self?.showAlert(title: "Account error", message: error.localizedDescription)
+                   // print(error.localizedDescription)
                  }
              case .success:
                  DispatchQueue.main.async {
@@ -100,7 +96,6 @@ class LoginViewController: UIViewController {
     
       private func navigateToMainView() {
           UIViewController.showViewController(storyboardName: "MainView", viewControllerId: "TabBarController")
-        //print("should go to main view")
       }
       
       private func clearErrorLabel() {
@@ -111,21 +106,18 @@ class LoginViewController: UIViewController {
           // change the account login state
           accountState = accountState == .existingUser ? .newUser : .existingUser
           
-          // animation duration
-          let duration: TimeInterval = 1.0
-          
+        
           if accountState == .existingUser {
-             // UIView.transition(with: containerView, duration: duration, options: [.transitionCrossDissolve], animations: {
+
                   self.loginButton.setTitle("Login", for: .normal)
                   self.accountStateMessageLabel.text = "Don't have an account ? Click"
                   self.accountStateButton.setTitle("SIGNUP", for: .normal)
-             // }, completion: nil)
+      
           } else {
-              //UIView.transition(with: containerView, duration: duration, options: [.transitionCrossDissolve], animations: {
+            
                   self.loginButton.setTitle("Sign Up", for: .normal)
                   self.accountStateMessageLabel.text = "Already have an account ?"
                   self.accountStateButton.setTitle("LOGIN", for: .normal)
-              //}, completion: nil)
           }
       }
 

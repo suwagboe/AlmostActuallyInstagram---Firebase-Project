@@ -32,9 +32,13 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-       // updateUserInfo()
+        updateUserInfo()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateUserInfo()
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -46,29 +50,22 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
               .addSnapshotListener({[weak self ](snapshot, error) in
                   if let error = error {
                       DispatchQueue.main.async {
-                        //  self?.showAlert(title: "Firestore Error", message: "\(error.localizedDescription)")
-                          print(error.localizedDescription)
+                          self?.showAlert(title: "Firestore Error", message: "\(error.localizedDescription)")
                       }
                   } else if let snapshot = snapshot {
                       print("there are \(snapshot.documents.count) items for sell")
                       let posts = snapshot.documents.map {newPost($0.data()) }
-                      // maps for thru each element in the array
-                      // each element represents $0
-                      //$0.data is a dictonary
-                      // for item in item is item and that is $0.data
-                  // why is this line not working
+                    
+                    // MARK: Alex why is this not working
                     self?.photosCollection = posts.filter { $0.userID == user.uid }
                   }
               })
     }
-    
-    
-    
+
     private func updateUserInfo(){
         guard let user = Auth.auth().currentUser else {
                           return
                       }
-                     // emailLabel.text = user.email
         if user.displayName == nil {
             displayName.text = "please input a display name"
             profileImage.image = UIImage(named: "still butterflies.gif")
@@ -94,7 +91,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             UIViewController.showViewController(storyboardName: "LoginView", viewControllerId: "LoginViewController")
               }catch{
                   DispatchQueue.main.async {
-                      //self.showAlert(title: "Error siging out", message: "\(error.localizedDescription)")
+                      self.showAlert(title: "Error siging out", message: "\(error.localizedDescription)")
                   }
                 print("\(error)")
               }
@@ -105,7 +102,6 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
         updateVC?.transitioningDelegate = self
         updateVC?.modalPresentationStyle = .custom
         updateUserInfo()
-        
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -119,11 +115,8 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
            transition.transitionMode = .dismiss
            transition.startingPoint = editProfile.center
            transition.circleColor = editProfile.backgroundColor!
-           
            return transition
        }
-    
-
 }
 
 extension ProfileViewController: UICollectionViewDataSource{
@@ -142,11 +135,8 @@ extension ProfileViewController: UICollectionViewDataSource{
         cell.layer.borderWidth = 3
         let post = photosCollection[indexPath.row]
         cell.configureCell(for: post)
-               
                return cell
     }
- 
-    
 }
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
