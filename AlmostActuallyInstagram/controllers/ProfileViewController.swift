@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ProfileViewController: UIViewController, UIViewControllerTransitioningDelegate{
 
@@ -18,6 +19,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     @IBOutlet weak var editProfile: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var listener: ListenerRegistration?
     
     private var photosCollection = [newPost]() {
         didSet{
@@ -30,17 +32,37 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+       // updateUserInfo()
+    }
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         updateUserInfo()
+        guard let user = Auth.auth().currentUser else {
+                return
+            }
+        listener = Firestore.firestore().collection(DatabaseServices.postCollection)
+              .addSnapshotListener({[weak self ](snapshot, error) in
+                  if let error = error {
+                      DispatchQueue.main.async {
+                        //  self?.showAlert(title: "Firestore Error", message: "\(error.localizedDescription)")
+                          print(error.localizedDescription)
+                      }
+                  } else if let snapshot = snapshot {
+                      print("there are \(snapshot.documents.count) items for sell")
+                      let posts = snapshot.documents.map {newPost($0.data()) }
+                      // maps for thru each element in the array
+                      // each element represents $0
+                      //$0.data is a dictonary
+                      // for item in item is item and that is $0.data
+                  // why is this line not working
+                    self?.photosCollection = posts.filter { $0.userID == user.uid }
+                  }
+              })
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-                updateUserInfo()
-    }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        updateUserInfo()
-//    }
     
     private func updateUserInfo(){
         guard let user = Auth.auth().currentUser else {
@@ -52,7 +74,7 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
             profileImage.image = UIImage(named: "still butterflies.gif")
         } else {
             displayName.text = user.displayName
-                       profileImage.kf.setImage(with: user.photoURL)
+            profileImage.kf.setImage(with: user.photoURL)
         }
                   
     }
@@ -77,16 +99,13 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
                 print("\(error)")
               }
     }
-    
-    private func fecthItems() {
-        
-    }
-    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let updateVC = segue.destination as? UpdateProfileViewController
         updateVC?.transitioningDelegate = self
         updateVC?.modalPresentationStyle = .custom
+        updateUserInfo()
+        
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -110,21 +129,59 @@ class ProfileViewController: UIViewController, UIViewControllerTransitioningDele
 extension ProfileViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return photosCollection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photosCell", for: indexPath)
+       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photosCell", for: indexPath) as? PostCell else {
+            fatalError("could not access the PostCell ")
+        }
+
+        cell.layer.cornerRadius = 50
+        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.layer.borderWidth = 3
+        let post = photosCollection[indexPath.row]
+        cell.configureCell(for: post)
                
                return cell
     }
-    
+ 
     
 }
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
   
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+               //let maxSize = UIScreen.main.bounds
+       
+     //  (self.objKeypadCollectionView.frame.size.width/3)-10, height: (self.objKeypadCollectionView.frame.size.height/4)-10)
+     
+       /*
+       let width = (maxSize.width / 3) - 10
+       let height = (maxSize.height / 4 ) - 10
+       
+               return CGSize(width: width , height: height)
+    */
+                  //let maxSize = UIScreen.main.bounds
+   let interItemSpacing: CGFloat = 10
+              let maxWidth = UIScreen.main.bounds.size.width
+              
+              let numberOfItems: CGFloat = 2
+              let totalSpacing: CGFloat = numberOfItems - interItemSpacing
+              
+              let itemWidth: CGFloat = (maxWidth - totalSpacing)/numberOfItems
+              
+              return CGSize(width: itemWidth, height: itemWidth)
+          }
+          func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+              
+              return UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+          }
+          func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+              
+              return 5
+          }
     
     
 }
+

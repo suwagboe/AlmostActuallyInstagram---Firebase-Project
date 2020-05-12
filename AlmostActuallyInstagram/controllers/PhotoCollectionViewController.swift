@@ -76,7 +76,6 @@ extension PhotoCollectionViewController: UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedCell", for: indexPath) as? PostCell else {
             fatalError("cant downcast as cell ")
         }
-        
         cell.layer.cornerRadius = 50
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 3
@@ -85,8 +84,7 @@ extension PhotoCollectionViewController: UICollectionViewDataSource{
             cell.delegate = self
                return cell
     }
-    
-    
+
 }
 
 extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout {

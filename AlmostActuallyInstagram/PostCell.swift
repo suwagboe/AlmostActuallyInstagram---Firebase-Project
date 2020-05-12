@@ -22,7 +22,7 @@ class PostCell: UICollectionViewCell {
     // step  2 custom protocol
     weak var delegate: PostCellDelegate?
 
-        @IBOutlet weak var itemImageView: UIImageView!
+        @IBOutlet weak var photo: UIImageView!
         @IBOutlet weak var captionLabel: UILabel!
         @IBOutlet weak var userNameLabel: UILabel!
         @IBOutlet weak var dateLabel: UILabel!
@@ -58,6 +58,17 @@ class PostCell: UICollectionViewCell {
                  caption: post.caption)
         }
     
+    public func configureProfileCell(for post: newPost) {
+        
+        
+        
+    }
+    
+    private func updateProfileUI(imageURL: String, caption: String){
+        photo.kf.setImage(with: URL(string: imageURL))
+        captionLabel.text = " CAPTION: \(caption)"
+
+    }
         
     
     private func updateUI(imageURL: String,
@@ -65,7 +76,7 @@ class PostCell: UICollectionViewCell {
                          // date: Timestamp,
                           caption: String ) {
         // todo: set up image, import kingfisher, install kingfisher via pods
-                   itemImageView.kf.setImage(with: URL(string: imageURL))
+                   photo.kf.setImage(with: URL(string: imageURL))
                    captionLabel.text = " CAPTION: \(caption)"
                    userNameLabel.text = "@\(userName)"
                  //  dateLabel.text = date.dateValue().dateStrin() // from the extension that we made.
